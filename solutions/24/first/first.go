@@ -3,14 +3,15 @@ package main
 import "fmt"
 
 func main() {
-	list := []int{1, 2, 3, 4, 7}
+	list := []int{}
 	l1 := generateList(list)
-	l2 := generateList([]int{1, 4, 5, 7, 8})
-	dumpList(l1)
-	dumpList(l2)
 
-	l3 := mergeTwoLists(l1, l2)
-	dumpList(l3)
+	dumpList(l1)
+
+	l2 := swapPairs(l1)
+
+	dumpList(l2)
+	// dumpList(l3)
 }
 
 type ListNode struct {
@@ -25,27 +26,32 @@ type ListNode struct {
  *     Next *ListNode
  * }
  */
-func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
-	head := &ListNode{}
-	cur := head
-	for l1 != nil && l2 != nil {
-		if l1.Val > l2.Val {
-			cur.Next = l2
-			l2 = l2.Next
-		} else {
-			cur.Next = l1
-			l1 = l1.Next
+func swapPairs(head *ListNode) *ListNode {
+	re := &ListNode{}
+	cur := re
+	i := 0
+	var pre *ListNode
+	for head != nil {
+		i++
+		node := head
+		head = head.Next
+		if i%2 != 0 {
+			pre = node
+			continue
 		}
+		cur.Next = node
+		cur = cur.Next
+		cur.Next = pre
 		cur = cur.Next
 	}
 
-	if l1 == nil {
-		cur.Next = l2
+	if i%2 != 0 {
+		cur.Next = pre
 	} else {
-		cur.Next = l1
+		cur.Next = head
 	}
 
-	return head.Next
+	return re.Next
 }
 
 func generateList(list []int) *ListNode {
