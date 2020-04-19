@@ -7,12 +7,12 @@
 // @lc code=start
 func twoSum(nums []int, target int) []int {
 	m := make(map[int]int, len(nums))
-	for i := 0; i < len(nums); i++ {
-		index := target - nums[i]
-		if b, ok := m[index]; ok {
-			return []int{b, i}
+	for i, num := range nums {
+
+		if v, ok := m[target-num]; ok {
+			return []int{v, i}
 		}
-		m[nums[i]] = i
+		m[num] = i
 	}
 	return []int{}
 }
