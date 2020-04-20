@@ -85,7 +85,7 @@ func (this *MyCircularDeque) GetRear() int {
 		return -1
 	}
 
-	return this.data[en(this.data)-1]
+	return this.data[len(this.data)-1]
 }
 
 /** Checks whether the circular deque is empty or not. */
